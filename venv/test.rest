@@ -18,16 +18,16 @@ Content-Type: application/json
 ### Read  a single user by id
 GET {{host}}/users/1
 Content-Type: application/json
-
+ 
 ### Update and item
-PUT {{host}}/users/4
+PUT {{host}}/users/1
 Content-Type: application/json
 
 {
-    "firstname": "Jack",
-    "lastname": "Thor",
-    "email": "jack.T@gmail.com",
-    "password": "jackT"
+    "firstname": "Ludi",
+    "lastname": "Balatero",
+    "email": "ludi@gmail.com",
+    "password": "123"
 }
 
 ### Delete an item
