@@ -1,3 +1,16 @@
+-- CREATE VIEW UserRecipeView AS
+-- SELECT
+--     u.userid AS user_id,
+--     u.firstname AS first_name,
+--     u.lastname AS last_name,
+--     r.recipeid AS recipe_id,
+--     r.title AS recipe_title,
+--     r.description AS recipe_description,
+--     r.imgsrc AS imagesource
+-- FROM
+--     User u
+-- JOIN Recipe r ON u.userid = r.userid;
+
 -- DELIMITER //
 -- CREATE PROCEDURE CreateRecipe(
 --     IN p_user_id INT,
@@ -46,18 +59,6 @@
 -- DELIMITER ;
 
 -- call InsertInstruction(1, 'slice onions', 5);
-
-
--- DELIMITER //
--- CREATE PROCEDURE InsertUser(IN p_firstname VARCHAR(255), IN p_lastname VARCHAR(255), IN p_email VARCHAR(255), IN p_password VARCHAR(255))
--- BEGIN
--- 	DECLARE p_user_id INT;
---     INSERT INTO user (firstname, lastname, email, password)
---     VALUES (p_firstname, p_lastname, p_email, p_password);
---     SET p_user_id = last_insert_id();
---     SELECT p_user_id as id;
--- END //
--- DELIMITER ;
 
 -- DELIMITER //
 -- CREATE PROCEDURE InsertUser(IN p_firstname VARCHAR(255), IN p_lastname VARCHAR(255), IN p_email VARCHAR(255), IN p_password VARCHAR(255))
@@ -116,22 +117,6 @@
 -- END //
 -- DELIMITER ;
 
-
--- DELIMITER $$$
--- CREATE TRIGGER BeforeDeleteUser
--- BEFORE DELETE
--- ON user FOR EACH ROW
--- BEGIN
---     -- Delete related records in the recipe table
---     DELETE FROM recipe WHERE userid = OLD.userid;
-
---     -- Delete related records in the ingredient table
---     DELETE FROM ingredient WHERE recipeid IN (SELECT recipeid FROM deleted_recipes);
-
---     -- Delete related records in the instruction table
---     DELETE FROM instruction WHERE recipeid IN (SELECT recipeid FROM deleted_recipes);
--- END $$$
--- DELIMITER ;
 
 -- DELIMITER $$
 -- CREATE PROCEDURE DeleteUser(
