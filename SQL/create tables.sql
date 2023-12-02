@@ -6,32 +6,26 @@
 --     email VARCHAR(100) UNIQUE NOT NULL
 -- );
 
--- CREATE TABLE Category (
--- 	categoryid INT PRIMARY KEY AUTO_INCREMENT,
---     categoryname VARCHAR(50) NOT NULL
--- );
-
 -- CREATE TABLE Recipe (
 --     RecipeID INT PRIMARY KEY AUTO_INCREMENT,
 --     userid INT,
---     categoryid INT,
+--     category VARCHAR(100) NOT NULL,
 --     Title VARCHAR(100) NOT NULL,
 --     Description TEXT,
 --     CookingTime INT,
 --     Servings INT,
 --     ImgSrc VARCHAR(255),
---     FOREIGN KEY (userid) REFERENCES User(userid),
---     FOREIGN KEY (categoryid) REFERENCES Category(categoryid)
+--     FOREIGN KEY (userid) REFERENCES User(userid)
 -- );
 
--- CREATE TABLE Ingredients (
---     IngID INT PRIMARY KEY AUTO_INCREMENT,
---     RecipeID INT,
---     Name VARCHAR(100) NOT NULL,
---     Quantity DECIMAL(10, 2) NOT NULL,
---     Measurement VARCHAR(50) NOT NULL,
---     FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
--- );
+CREATE TABLE Ingredients (
+    ingredientID INT PRIMARY KEY AUTO_INCREMENT,
+    RecipeID INT,
+    Name VARCHAR(100) NOT NULL,
+    Quantity DECIMAL(10, 2) NOT NULL,
+    Measurement VARCHAR(50) NOT NULL,
+    FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
+);
 
 -- CREATE TABLE Instruction (
 --     InstructID INT PRIMARY KEY AUTO_INCREMENT,

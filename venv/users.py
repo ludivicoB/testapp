@@ -44,15 +44,11 @@ def get_user_by_id(id):
     return rv
 
 def update_user(id, data):
-    #@TODO - replace this with a database call UPDATE
-    for user in users:
-        if user["id"] == int(id):
-            user["firstname"] = data["firstname"]
-            user["lastname"] = data["lastname"]
-            user["email"] = data["email"]
-            user["password"] = data["password"]
-            return user
-    return None
+    cur = execute("""CALL UpdateUser(%s, %s, %s, %s, %s)""",
+            (id, data["firstname"], data["lastname"], data["email"], data["password"]))
+    row = cur.fetchone()
+    data["id"] = row["id"]
+    return data
 
 def delete_user(id):
     #@TODO - replace this with a database call DELETE
