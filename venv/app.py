@@ -2,19 +2,29 @@ from flask import Flask, request, jsonify
 from users import get_all_users, get_user_by_id, create_user, update_user, delete_user
 from users import get_all_recipes, get_recipe_by_id, get_all_recipe_by_userid
 from flask_mysqldb import MySQL
-
 from database import set_database
-
-
+from dotenv import load_dotenv
+from os import getenv
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
+load_dotenv()
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'D0oll@ar'
-app.config['MYSQL_DB'] = 'im2_finalproject'
-app.config["MYSQL_CURSORCLASS"] = "DictCursor" # to return rows as dictionaries not array
-app.config["MYSQL_AUTOCOMMIT"] = True
+app.config['MYSQL_HOST'] = getenv('MYSQL_HOST')
+# app.config['MYSQL_PORT'] = getenv('MYSQL_PORT')
+app.config['MYSQL_USER'] = getenv('MYSQL_USER')
+app.config['MYSQL_PASSWORD'] = getenv('MYSQL_PASSWORD')
+app.config['MYSQL_DB'] = getenv('MYSQL_DB')
+app.config["MYSQL_CURSORCLASS"] = getenv('MYSQL_CURSORCLASS') # to return rows as dictionaries not array
+app.config["MYSQL_AUTOCOMMIT"] = True if getenv('MYSQL_AUTOCOMMIT') == 'True' else False
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_PORT'] = 3306
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'D0oll@ar'
+# app.config['MYSQL_DB'] = 'im2_finalproject'
+# app.config["MYSQL_CURSORCLASS"] = "DictCursor" # to return rows as dictionaries not array
+# app.config["MYSQL_AUTOCOMMIT"] = True
+
 mysql = MySQL(app)
 set_database(mysql) 
 

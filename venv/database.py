@@ -1,5 +1,5 @@
 mysql = None
-cusrsor = None
+cursor = None
 
 def set_database(mysql_instance):
     global mysql

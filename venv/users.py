@@ -1,16 +1,6 @@
 from database import fetchall, fetchone, execute
 
-"""
-DELIMITER $$$
-CREATE PROCEDURE DeleteUser(
-    IN p_id INT
-)
-BEGIN
-    DELETE 
-    FROM user 
-    WHERE id = p_id;
-END $$$
-"""
+
 
 def create_user(data):
     # CREATE PROCEDURE InsertUser(firstname, lastname, email, password)
