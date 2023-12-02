@@ -18,14 +18,14 @@
 --     FOREIGN KEY (userid) REFERENCES User(userid)
 -- );
 
-CREATE TABLE Ingredients (
-    ingredientID INT PRIMARY KEY AUTO_INCREMENT,
-    RecipeID INT,
-    Name VARCHAR(100) NOT NULL,
-    Quantity DECIMAL(10, 2) NOT NULL,
-    Measurement VARCHAR(50) NOT NULL,
-    FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
-);
+-- CREATE TABLE Ingredients (
+--     ingredientID INT PRIMARY KEY AUTO_INCREMENT,
+--     RecipeID INT,
+--     Name VARCHAR(100) NOT NULL,
+--     Quantity DECIMAL(10, 2) NOT NULL,
+--     Measurement VARCHAR(50) NOT NULL,
+--     FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
+-- );
 
 -- CREATE TABLE Instruction (
 --     InstructID INT PRIMARY KEY AUTO_INCREMENT,
