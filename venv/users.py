@@ -24,10 +24,14 @@ users = [
     }
 ]
 
-# NEED TO FIX
+
 def create_user(data):
-    execute("""CALL InsertUser(%s, %s, %s, %s)""",
-             (data["firstname"], data["lastname"], data["email"], data["password"]))
+    # CREATE PROCEDURE InsertUser(firstname, lastname, email, password)
+    cur = execute("""CALL InsertUser(%s, %s, %s, %s)""", 
+            (data["firstname"], data["lastname"], data["email"], data["password"]))
+    row = cur.fetchone()
+    data["id"] = row["id"]
+    return data
    
 
 

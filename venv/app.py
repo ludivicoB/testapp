@@ -14,8 +14,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'D0oll@ar'
 app.config['MYSQL_DB'] = 'im2_finalproject'
 app.config["MYSQL_CURSORCLASS"] = "DictCursor" # to return rows as dictionaries not array
-
-
+app.config["MYSQL_AUTOCOMMIT"] = True
 mysql = MySQL(app)
 set_database(mysql) 
 
@@ -49,7 +48,7 @@ def recipes():
     result = get_all_recipes()
     return jsonify(result)
 
-@app.route('/recipes/<id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/recipes/<id>', methods=['GET'])
 def recipes_by_id(id):
     result = get_recipe_by_id(id)
     return jsonify(result)

@@ -21,11 +21,14 @@
 -- DELIMITER //
 -- CREATE PROCEDURE InsertUser(IN p_firstname VARCHAR(255), IN p_lastname VARCHAR(255), IN p_email VARCHAR(255), IN p_password VARCHAR(255))
 -- BEGIN
+-- 	DECLARE p_user_id INT;
 --     INSERT INTO user (firstname, lastname, email, password)
 --     VALUES (p_firstname, p_lastname, p_email, p_password);
+--     SET p_user_id = last_insert_id();
+--     SELECT p_user_id as id;
 -- END //
 -- DELIMITER ;
 
-CALL InsertUser('Mister', 'Nonoy', 'mrnonoy@gmail', '1234');
+CALL InsertUser('Clark', 'Kent', 'ck@gmail', '1234');
 
 
