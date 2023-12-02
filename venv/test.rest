@@ -1,0 +1,50 @@
+@host = http://127.0.0.1:5000
+
+### Create a new item
+POST {{host}}/users
+Content-Type: application/json
+
+{
+    "firstname": "Jay",
+    "lastname": "Dough",
+    "email": "jaydough@gmail.com",
+    "password": "jd123"
+}
+
+### Read the lists of all the users
+GET {{host}}/users
+Content-Type: application/json
+
+### Read  a single user by id
+GET {{host}}/users/1
+Content-Type: application/json
+
+### Update and item
+PUT {{host}}/users/4
+Content-Type: application/json
+
+{
+    "firstname": "Jack",
+    "lastname": "Thor",
+    "email": "jack.T@gmail.com",
+    "password": "jackT"
+}
+
+### Delete an item
+DELETE {{host}}/users/4
+Content-Type: : application/json
+
+### Get All Recipes
+GET  {{host}}/recipes
+Content-Type: application/json
+
+### Get Recipe by recipeid
+GET {{host}}/recipes/3
+Content-Type: application/json
+
+### Get all Recipe of a user
+GET {{host}}/recipes/user/1
+Content-Type: application/json
+
+
+
