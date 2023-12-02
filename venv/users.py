@@ -1,29 +1,16 @@
 from database import fetchall, fetchone, execute
 
-users = [
-    {
-        "id": 1,
-        "firstname": "John",
-        "lastname": "Doe",
-        "email": "XQyPj@example.com",
-        "password": "123456"
-    },
-    {
-        "id": 2,
-        "firstname": "Jane",
-        "lastname": "Doe",
-        "email": "XQyPj@example.com",
-        "password": "123456"
-    },
-    {
-        "id": 3,
-        "firstname": "Joe",
-        "lastname": "Mama",
-        "email": "XQyPj@example.com",
-        "password": "123456"
-    }
-]
-
+"""
+DELIMITER $$$
+CREATE PROCEDURE DeleteUser(
+    IN p_id INT
+)
+BEGIN
+    DELETE 
+    FROM user 
+    WHERE id = p_id;
+END $$$
+"""
 
 def create_user(data):
     # CREATE PROCEDURE InsertUser(firstname, lastname, email, password)
@@ -51,13 +38,11 @@ def update_user(id, data):
     return data
 
 def delete_user(id):
-    #@TODO - replace this with a database call DELETE
-    for index, user in enumerate(users):
-        if user["id"] == int(id):
-            users.pop(index)
-            return True
+    cur = execute("""CALL DeleteUser(%s)""", (id,))
+    row = cur.fetchone()
+    if row is None:
+        return True
     return False
-
 
 
 def get_all_recipes():

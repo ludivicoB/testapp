@@ -38,7 +38,11 @@ def users_by_id(id):
         data = request.get_json()
         result = update_user(id, data)
     if request.method == 'DELETE':
-        result = delete_user(id)
+        result = get_user_by_id(id)
+        if result is not None:
+            result = delete_user(id)
+        else:
+            result = False;
     else:
         result = get_user_by_id(id)
     return jsonify(result)

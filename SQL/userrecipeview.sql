@@ -1,0 +1,15 @@
+-- insert recipe (userid, category, title, description, cookingtime, servings, imgsrc)
+-- values(2, 'lunch', 'Fried Chicken', 'simple fried chicken recipe', 20, 3, 'crispy-chicken.png')
+
+-- CREATE VIEW UserRecipeView AS
+-- SELECT
+--     u.userid AS user_id,
+--     u.firstname AS first_name,
+--     u.lastname AS last_name,
+--     r.recipeid AS recipe_id,
+--     r.title AS recipe_title,
+--     r.description AS recipe_description,
+--     r.imgsrc AS imagesource
+-- FROM
+--     User u
+-- JOIN Recipe r ON u.userid = r.userid;

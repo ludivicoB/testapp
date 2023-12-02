@@ -15,7 +15,7 @@
 --     CookingTime INT,
 --     Servings INT,
 --     ImgSrc VARCHAR(255),
---     FOREIGN KEY (userid) REFERENCES User(userid)
+--     FOREIGN KEY (userid) REFERENCES User(userid) ON DELETE CASCADE
 -- );
 
 -- CREATE TABLE Ingredients (
@@ -24,7 +24,7 @@
 --     Name VARCHAR(100) NOT NULL,
 --     Quantity DECIMAL(10, 2) NOT NULL,
 --     Measurement VARCHAR(50) NOT NULL,
---     FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
+--     FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASCADE
 -- );
 
 -- CREATE TABLE Instruction (
@@ -32,7 +32,7 @@
 --     StepNum INT NOT NULL,
 --     Description TEXT NOT NULL,
 --     RecipeID INT,
---     FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
+--     FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASCADE
 -- );
 
 

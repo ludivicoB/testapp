@@ -1,8 +1,7 @@
 -- DELIMITER //
-
--- CREATE PROCEDURE save_recipe(
+-- CREATE PROCEDURE CreateRecipe(
 --     IN p_user_id INT,
---     IN p_category_id INT,
+--     IN p_category VARCHAR(100),
 --     IN p_title VARCHAR(255),
 --     IN p_description VARCHAR(255),
 --     IN p_cooking_time INT,
@@ -10,13 +9,44 @@
 --     IN p_imgsrc VARCHAR(255)
 -- )
 -- BEGIN
---     INSERT INTO Recipe (userid, categoryid, title, description, cookingtime, servings, imgsrc)
---     VALUES (p_user_id, p_category_id, p_title, p_description, p_cooking_time, p_servings, p_imgsrc);
+--     insert recipe (userid, category, title, description, cookingtime, servings, imgsrc)
+--     VALUES (p_user_id, p_category, p_title, p_description, p_cooking_time, p_servings, p_imgsrc);
 -- END //
 
 -- DELIMITER ;
 
--- CALL save_recipe(2, 2, 'Bulalo', 'A tasty recipe of bulalo', 30, 5, 'bulalo.jpg');
+-- CALL CreateRecipe(3, 'lunch', 'Bulalo', 'A tasty recipe of bulalo', 30, 5, 'bulalo.jpg');
+
+
+-- DELIMITER //
+-- create procedure InsertIngredient(
+-- 	IN p_recipe_id INT,
+--     IN p_name VARCHAR(200),
+--     IN p_quantity DECIMAL(10, 2),
+-- 	IN p_measurement VARCHAR(50)
+-- )
+-- begin
+-- 	insert ingredients (recipeid, name, quantity, measurement)
+--     values (p_recipe_id, p_name, p_quantity, p_measurement);
+-- end //
+-- DELIMITER ;
+
+-- call InsertIngredient(5, 'onion', 1, 'piece');
+
+-- DELIMITER //
+-- create procedure InsertInstruction(
+-- 	IN p_stepnum INT,
+--     IN p_description VARCHAR(500),
+--     IN p_recipe_id INT
+-- )
+-- begin 
+-- 	insert instruction(stepnum, description, recipeid)
+--     values (p_stepnum, p_description, p_recipe_id);
+-- end //
+-- DELIMITER ;
+
+-- call InsertInstruction(1, 'slice onions', 5);
+
 
 -- DELIMITER //
 -- CREATE PROCEDURE InsertUser(IN p_firstname VARCHAR(255), IN p_lastname VARCHAR(255), IN p_email VARCHAR(255), IN p_password VARCHAR(255))
@@ -56,34 +86,69 @@
 -- CALL InsertUser('Clark', 'Kent', 'ck@gmail', '1234');
 
 
-DELIMITER //
-CREATE PROCEDURE UpdateUser(
-    IN p_userid INT,
-    IN p_firstname VARCHAR(255),
-    IN p_lastname VARCHAR(255),
-    IN p_email VARCHAR(255),
-    IN p_password VARCHAR(255)
-)
-BEGIN
-    DECLARE user_exists INT;
+-- DELIMITER //
+-- CREATE PROCEDURE UpdateUser(
+--     IN p_userid INT,
+--     IN p_firstname VARCHAR(255),
+--     IN p_lastname VARCHAR(255),
+--     IN p_email VARCHAR(255),
+--     IN p_password VARCHAR(255)
+-- )
+-- BEGIN
+--     DECLARE user_exists INT;
 
-    -- Check if the user with the specified userid exists
-    SELECT COUNT(*) INTO user_exists FROM user WHERE userid = p_userid;
+--     -- Check if the user with the specified userid exists
+--     SELECT COUNT(*) INTO user_exists FROM user WHERE userid = p_userid;
 
-    IF user_exists > 0 THEN
-        -- If the user exists, proceed with the update
-        UPDATE user
-        SET firstname = p_firstname,
-            lastname = p_lastname,
-            email = p_email,
-            password = p_password
-        WHERE userid = p_userid;
-        SELECT p_userid AS id;
-    ELSE
-        -- If the user is not found, return 0
-        SELECT 0 AS id;
-    END IF;
-END //
-DELIMITER ;
+--     IF user_exists > 0 THEN
+--         -- If the user exists, proceed with the update
+--         UPDATE user
+--         SET firstname = p_firstname,
+--             lastname = p_lastname,
+--             email = p_email,
+--             password = p_password
+--         WHERE userid = p_userid;
+--         SELECT p_userid AS id;
+--     ELSE
+--         -- If the user is not found, return 0
+--         SELECT 0 AS id;
+--     END IF;
+-- END //
+-- DELIMITER ;
+
+
+-- DELIMITER $$$
+-- CREATE TRIGGER BeforeDeleteUser
+-- BEFORE DELETE
+-- ON user FOR EACH ROW
+-- BEGIN
+--     -- Delete related records in the recipe table
+--     DELETE FROM recipe WHERE userid = OLD.userid;
+
+--     -- Delete related records in the ingredient table
+--     DELETE FROM ingredient WHERE recipeid IN (SELECT recipeid FROM deleted_recipes);
+
+--     -- Delete related records in the instruction table
+--     DELETE FROM instruction WHERE recipeid IN (SELECT recipeid FROM deleted_recipes);
+-- END $$$
+-- DELIMITER ;
+
+-- DELIMITER $$
+-- CREATE PROCEDURE DeleteUser(
+--     IN p_id INT
+-- )
+-- BEGIN
+--     DELETE from user where userid = p_id;
+--     SELECT userid from user
+--     where userid = p_id;
+-- END $$
+-- DELIMITER ;
+
+-- CALL DeleteUser(2);
+
+
+
+
+
 
 
