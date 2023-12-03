@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from users import get_all_users, get_user_by_id, create_user, update_user, delete_user
 from users import get_all_recipes, get_recipe_by_id, get_all_recipe_by_userid
+from users import get_allingredients_by_recipeid
+from users import get_allinstructions_by_recipeid
 from flask_mysqldb import MySQL
 from database import set_database
 from dotenv import load_dotenv
@@ -70,4 +72,14 @@ def recipes_by_id(id):
 @app.route('/recipes/user/<id>', methods=['GET'])
 def recipes_by_userid(id):
     result = get_all_recipe_by_userid(id)
+    return jsonify(result)
+
+@app.route('/recipes/ingredients/<id>', methods=['GET'])
+def ingredients_by_recipeid(id):
+    result = get_allingredients_by_recipeid(id)
+    return jsonify(result)
+
+@app.route('/recipes/instructions/<id>', methods=['GET'])
+def instructions_by_recipeid(id):
+    result = get_allinstructions_by_recipeid(id)
     return jsonify(result)

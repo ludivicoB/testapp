@@ -50,4 +50,10 @@ GET {{host}}/recipes/user/1
 Content-Type: application/json
 
 
+### Get all ingredients of a recipe
+GET {{host}}/recipes/ingredients/6
+Content-Type: application/json
 
+### Get all instructions of a recipe
+GET {{host}}/recipes/instructions/6
+Content-Type: application/json

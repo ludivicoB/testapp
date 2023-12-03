@@ -47,3 +47,10 @@ def get_all_recipe_by_userid(id):
     rv = fetchall("""SELECT * FROM UserRecipeView where user_id = %s""", (id,))
     return rv
 
+def get_allingredients_by_recipeid(id):
+    rv = fetchall("""SELECT * FROM RecipeIngredientView where recipe_id = %s""", (id,))
+    return rv
+
+def get_allinstructions_by_recipeid(id):
+    rv = fetchall("""SELECT * FROM RecipeInstructionView where recipe_id = %s""", (id,))
+    return rv
