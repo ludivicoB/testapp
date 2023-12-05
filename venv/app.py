@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from users import get_all_users, get_user_by_id, create_user, update_user, delete_user
-from users import get_all_recipes, get_recipe_by_id, get_all_recipe_by_userid
+from users import get_all_recipes, get_recipe_by_id, get_all_recipe_by_userid, create_recipe
 from users import get_allingredients_by_recipeid
 from users import get_allinstructions_by_recipeid
 from flask_mysqldb import MySQL
@@ -63,6 +63,16 @@ def users_by_id(id):
 def recipes():
     result = get_all_recipes()
     return jsonify(result)
+
+@app.route('/recipes', methods=['POST'])
+def create_recipe_user():
+    if request.method == 'POST':
+        user_id = request.json.get("user_id")
+        recipe_data = request.get_json()
+        result = create_recipe(user_id, recipe_data)      
+    else:
+        result = get_all_recipes()
+    return jsonify(result) 
 
 @app.route('/recipes/<id>', methods=['GET'])
 def recipes_by_id(id):

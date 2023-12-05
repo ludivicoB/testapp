@@ -54,3 +54,14 @@ def get_allingredients_by_recipeid(id):
 def get_allinstructions_by_recipeid(id):
     rv = fetchall("""SELECT * FROM RecipeInstructionView where recipe_id = %s""", (id,))
     return rv
+
+def create_recipe(user_id, data):
+    cur = execute("""CALL CreateRecipe(%s, %s, %s, %s, %s, %s, %s)""", 
+                  (user_id, data["category"], data["Title"],
+                   data["Description"], data["CookingTime"],
+                   data["Servings"], data.get("ImgSrc", "")))
+
+    row = cur.fetchone()
+    data["id"] = row["id"]
+    data["user_id"] = user_id
+    return data

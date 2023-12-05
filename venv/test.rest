@@ -35,6 +35,19 @@ DELETE {{host}}/users/3
 Content-Type: : application/json
 
 
+### Create a new recipe
+POST {{host}}/recipes
+Content-Type: application/json
+
+{
+    "user_id": 4,
+    "category": "Chicken",
+    "Title": "Lasagna",
+    "Description": "A classic dish",
+    "CookingTime": 30,
+    "Servings": 4,
+    "ImgSrc": "http://example.com/spaghetti.jpg"
+}
 
 
 ### Get All Recipes
